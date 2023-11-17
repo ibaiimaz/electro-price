@@ -30,25 +30,7 @@ export class ElectroPrice {
                 }
             }
 
-            if (this.device.energyCertificate !== "A" && this.device.energyCertificate !== "C") {
-                if (this.device.energyCertificate !== "B" && this.device.energyCertificate !== "D") {
-                    if (this.device.energyCertificate !== "E") {
-                        calculoFinal = calculoFinal + 10;
-                    } else {
-                        calculoFinal = calculoFinal + 30;
-                    }
-                } else if (this.device.energyCertificate !== "B") {
-                    calculoFinal = calculoFinal + 50;
-                } else {
-                    calculoFinal = calculoFinal + 80;
-                }
-            } else {
-                if (this.device.energyCertificate === "C") {
-                    calculoFinal = calculoFinal + 60;
-                } else {
-                    calculoFinal = calculoFinal + 100;
-                }
-            }
+            calculoFinal = this.calculateEnergycCertificate(calculoFinal);
 
             if ((this.device.weight >= 0) && (this.device.weight <= 199) && this.device.basePrice <= 1500) {
                 calculoFinal = calculoFinal + 10;
@@ -75,25 +57,7 @@ export class ElectroPrice {
                 calculoFinal = this.device.basePrice;
             }
 
-            if (this.device.energyCertificate !== "A" && this.device.energyCertificate !== "C") {
-                if (this.device.energyCertificate !== "B" && this.device.energyCertificate !== "D") {
-                    if (this.device.energyCertificate !== "E") {
-                        calculoFinal = calculoFinal + 10;
-                    } else {
-                        calculoFinal = calculoFinal + 30;
-                    }
-                } else if (this.device.energyCertificate !== "B") {
-                    calculoFinal = calculoFinal + 50;
-                } else {
-                    calculoFinal = calculoFinal + 80;
-                }
-            } else {
-                if (this.device.energyCertificate === "C") {
-                    calculoFinal = calculoFinal + 60;
-                } else {
-                    calculoFinal = calculoFinal + 100;
-                }
-            }
+            calculoFinal = this.calculateEnergycCertificate(calculoFinal);
 
             if ((this.device.weight >= 0) && (this.device.weight <= 199) && this.device.basePrice <= 1500) {
                 calculoFinal = calculoFinal + 10;
@@ -112,7 +76,7 @@ export class ElectroPrice {
                 }
             }
         } else if (this.device.name === "Heater") {
-            if (season !== "autumn" && season !== "winter") {} else {
+            if (season !== "autumn" && season !== "winter") { } else {
                 calculoFinal = calculoFinal + this.device.basePrice;
                 calculoFinal = this.device.basePrice * 1.2;
             }
@@ -127,25 +91,7 @@ export class ElectroPrice {
                 }
             }
 
-            if (this.device.energyCertificate !== "A" && this.device.energyCertificate !== "C") {
-                if (this.device.energyCertificate !== "B" && this.device.energyCertificate !== "D") {
-                    if (this.device.energyCertificate !== "E") {
-                        calculoFinal = calculoFinal + 10;
-                    } else {
-                        calculoFinal = calculoFinal + 30;
-                    }
-                } else if (this.device.energyCertificate !== "B") {
-                    calculoFinal = calculoFinal + 50;
-                } else {
-                    calculoFinal = calculoFinal + 80;
-                }
-            } else {
-                if (this.device.energyCertificate === "C") {
-                    calculoFinal = calculoFinal + 60;
-                } else {
-                    calculoFinal = calculoFinal + 100;
-                }
-            }
+            calculoFinal = this.calculateEnergycCertificate(calculoFinal);
 
             if ((this.device.weight >= 0) && (this.device.weight <= 199) && this.device.basePrice <= 1500) {
                 calculoFinal = calculoFinal + 10;
@@ -201,6 +147,23 @@ export class ElectroPrice {
             }
         }
 
+        return calculoFinal;
+    }
+
+    calculateEnergycCertificate(calculoFinal: number) {
+        if (this.device.energyCertificate === "A") {
+            calculoFinal = calculoFinal + 100;
+        } else if ((this.device.energyCertificate === "C")) {
+            calculoFinal = calculoFinal + 60;
+        } else if ((this.device.energyCertificate === "B")) {
+            calculoFinal = calculoFinal + 80;
+        } else if ((this.device.energyCertificate === "D")) {
+            calculoFinal = calculoFinal + 50;
+        } else if ((this.device.energyCertificate === "E")) {
+            calculoFinal = calculoFinal + 30;
+        } else {
+            calculoFinal = calculoFinal + 10;
+        }
         return calculoFinal;
     }
 }
