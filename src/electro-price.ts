@@ -31,23 +31,7 @@ export class ElectroPrice {
             }
 
             calculoFinal = this.calculateEnergycCertificate(calculoFinal);
-
-            if ((this.device.weight >= 0) && (this.device.weight <= 199) && this.device.basePrice <= 1500) {
-                calculoFinal = calculoFinal + 10;
-            } else {
-                if (this.device.basePrice <= 1500) {
-                    if ((this.device.weight >= 200) && (this.device.weight <= 999)) {
-                        calculoFinal = calculoFinal + 50;
-                    }
-                    if ((this.device.weight >= 1000) && (this.device.weight <= 4999)) {
-                        calculoFinal = calculoFinal + 80;
-                    } else {
-                        if ((this.device.weight >= 5000)) {
-                            calculoFinal = calculoFinal + 100;
-                        }
-                    }
-                }
-            }
+            calculoFinal = this.calculateWeightPrize(calculoFinal);
         } else if (this.device.name === "TV") {
             if (!(season !== "autumn" && season !== "winter")) {
                 calculoFinal = calculoFinal + this.device.basePrice;
@@ -58,23 +42,7 @@ export class ElectroPrice {
             }
 
             calculoFinal = this.calculateEnergycCertificate(calculoFinal);
-
-            if ((this.device.weight >= 0) && (this.device.weight <= 199) && this.device.basePrice <= 1500) {
-                calculoFinal = calculoFinal + 10;
-            } else {
-                if (this.device.basePrice <= 1500) {
-                    if ((this.device.weight >= 200) && (this.device.weight <= 999)) {
-                        calculoFinal = calculoFinal + 50;
-                    }
-                    if ((this.device.weight >= 1000) && (this.device.weight <= 4999)) {
-                        calculoFinal = calculoFinal + 80;
-                    } else {
-                        if ((this.device.weight >= 5000)) {
-                            calculoFinal = calculoFinal + 100;
-                        }
-                    }
-                }
-            }
+            calculoFinal = this.calculateWeightPrize(calculoFinal);
         } else if (this.device.name === "Heater") {
             if (season !== "autumn" && season !== "winter") { } else {
                 calculoFinal = calculoFinal + this.device.basePrice;
@@ -92,23 +60,7 @@ export class ElectroPrice {
             }
 
             calculoFinal = this.calculateEnergycCertificate(calculoFinal);
-
-            if ((this.device.weight >= 0) && (this.device.weight <= 199) && this.device.basePrice <= 1500) {
-                calculoFinal = calculoFinal + 10;
-            } else {
-                if (this.device.basePrice <= 1500) {
-                    if ((this.device.weight >= 200) && (this.device.weight <= 999)) {
-                        calculoFinal = calculoFinal + 50;
-                    }
-                    if ((this.device.weight >= 1000) && (this.device.weight <= 4999)) {
-                        calculoFinal = calculoFinal + 80;
-                    } else {
-                        if ((this.device.weight >= 5000)) {
-                            calculoFinal = calculoFinal + 100;
-                        }
-                    }
-                }
-            }
+            calculoFinal = this.calculateWeightPrize(calculoFinal);
         } else {
             if (season !== "autumn" && season !== "winter") {
                 if (season !== "spring") {
@@ -129,24 +81,25 @@ export class ElectroPrice {
                 }
             }
 
-            if ((this.device.weight >= 0) && (this.device.weight <= 199) && this.device.basePrice <= 1500) {
-                calculoFinal = calculoFinal + 10;
-            } else {
-                if (this.device.basePrice <= 1500) {
-                    if ((this.device.weight >= 200) && (this.device.weight <= 999)) {
-                        calculoFinal = calculoFinal + 50;
-                    }
-                    if ((this.device.weight >= 1000) && (this.device.weight <= 4999)) {
-                        calculoFinal = calculoFinal + 80;
-                    } else {
-                        if ((this.device.weight >= 5000)) {
-                            calculoFinal = calculoFinal + 100;
-                        }
-                    }
-                }
-            }
+            calculoFinal = this.calculateWeightPrize(calculoFinal);
         }
 
+        return calculoFinal;
+    }
+
+    private calculateWeightPrize(calculoFinal: number) {
+        if (this.device.basePrice <= 1500) {
+            if ((this.device.weight >= 0) && (this.device.weight <= 199)) {
+                calculoFinal = calculoFinal + 10;
+            } else if ((this.device.weight >= 200) && (this.device.weight <= 999)) {
+                calculoFinal = calculoFinal + 50;
+            } else if ((this.device.weight >= 1000) && (this.device.weight <= 4999)) {
+                calculoFinal = calculoFinal + 80;
+            } else if ((this.device.weight >= 5000)) {
+                calculoFinal = calculoFinal + 100;
+            }
+
+        }
         return calculoFinal;
     }
 
