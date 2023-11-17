@@ -11,75 +11,42 @@ export class ElectroPrice {
         let calculoFinal = 0;
 
         if (this.device.name === "Fan") {
-            if (season !== "autumn" && season !== "winter") {
-                if (season !== "spring") {
-                    if (season === "summer") {
-                        calculoFinal = this.device.basePrice * 1.3;
-                    }
-                }
-            } else {
-                calculoFinal = calculoFinal + this.device.basePrice;
-            }
-
-            if (season !== "autumn") {
-                if (season !== "summer") {
-                    calculoFinal = this.device.basePrice;
-                }
-                if (season === "winter") {
-                    calculoFinal = calculoFinal * 0.7;
-                }
-            }
-
-            calculoFinal = this.calculateEnergycCertificate(calculoFinal);
-            calculoFinal = this.calculateWeightPrize(calculoFinal);
-        } else if (this.device.name === "TV") {
-            if (!(season !== "autumn" && season !== "winter")) {
-                calculoFinal = calculoFinal + this.device.basePrice;
-            }
-
-            if (season !== "autumn") {
+            if (season === "summer") {
+                calculoFinal = this.device.basePrice * 1.3;
+            } else if (season === "autumn") {
+                calculoFinal = this.device.basePrice;
+            } else if (season === "winter") {
+                calculoFinal = this.device.basePrice;
+                calculoFinal = calculoFinal * 0.7;
+            } else if (season === "spring") {
                 calculoFinal = this.device.basePrice;
             }
 
             calculoFinal = this.calculateEnergycCertificate(calculoFinal);
             calculoFinal = this.calculateWeightPrize(calculoFinal);
-        } else if (this.device.name === "Heater") {
-            if (season !== "autumn" && season !== "winter") { } else {
-                calculoFinal = calculoFinal + this.device.basePrice;
-                calculoFinal = this.device.basePrice * 1.2;
-            }
+        } else if (this.device.name === "TV") {
+            calculoFinal = this.device.basePrice;
 
-            if (season !== "autumn") {
-                if (season === "spring") {
-                    calculoFinal = this.device.basePrice;
-                }
-                if (season === "summer") {
-                    calculoFinal = this.device.basePrice;
-                    calculoFinal = calculoFinal * 0.8;
-                }
+            calculoFinal = this.calculateEnergycCertificate(calculoFinal);
+            calculoFinal = this.calculateWeightPrize(calculoFinal);
+        } else if (this.device.name === "Heater") {
+            if (season === "autumn") {
+                calculoFinal = this.device.basePrice;
+                calculoFinal = this.device.basePrice * 1.2;
+            } else if (season === "winter") {
+                calculoFinal = this.device.basePrice;
+                calculoFinal = this.device.basePrice * 1.2;
+            } else if (season === "spring") {
+                calculoFinal = this.device.basePrice;
+            } else if (season === "summer") {
+                calculoFinal = this.device.basePrice;
+                calculoFinal = calculoFinal * 0.8;
             }
 
             calculoFinal = this.calculateEnergycCertificate(calculoFinal);
             calculoFinal = this.calculateWeightPrize(calculoFinal);
         } else {
-            if (season !== "autumn" && season !== "winter") {
-                if (season !== "spring") {
-                    calculoFinal = calculoFinal + this.device.basePrice;
-                }
-            } else {
-                if (this.device.name !== "Fan" && this.device.name !== "TV") {
-                    calculoFinal = calculoFinal + this.device.basePrice;
-                }
-            }
-
-            if (season !== "autumn") {
-                if (season !== "summer" || this.device.name !== "Fan") {
-                    calculoFinal = this.device.basePrice;
-                }
-                if (season === "summer") {
-                    calculoFinal = this.device.basePrice;
-                }
-            }
+            calculoFinal = this.device.basePrice;
 
             calculoFinal = this.calculateWeightPrize(calculoFinal);
         }
